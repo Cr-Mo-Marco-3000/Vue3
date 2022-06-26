@@ -28,8 +28,9 @@
 - 처음 어플리케이션을 시작할 때, createApp 함수를 사용해서 어플리케이션 인스턴스를 만들어 준다.
 
   - `const app = Vue.createApp({})`
-- `  const app = createApp({})`
-- 
+  - `  const app = createApp({})`
+  
+  
 
 
 

@@ -47,6 +47,12 @@
       <a v-bind='bigBoldYellow'>구글로 뿅뿅</a>
     </div>
 
+    <!-- 1-3. 동적 인자(dynamic arguments) 사용 -->
+    <div>
+      <!-- :[attributename]으로 강제 변환된다. -->
+      <a :[attributeName]="url">동적 인자: 구글로 뿅뿅</a>
+    </div>
+
     <!-------------------------------------------------------------------->
     <!-- 2. 클래스 바인딩 -->
     <!-- isRed가 true면 active라는 클래스를 주고 싶을 때. -->
@@ -56,7 +62,7 @@
     <hr>
 
     <!-- 클래스 여러 개 적용 시 배열로 묶어줌 -->
-    <h3 v-bind="[active, my-background-color]">
+    <h3 :class="[active, myBackground]">
       Hello vue js
     </h3>
 
@@ -75,7 +81,7 @@
   <script>
     const { createApp } = Vue 
     
-    const app = Vue.createApp({
+    createApp({
       data () {
         return {
           imageSrc: 'http://picsum.photos/200/300',
@@ -83,10 +89,12 @@
             style: 'color: red;',
             href: 'https://google.co.kr'
           },
+          attributename: 'href',
+          url:'https://google.co.kr',
           isButtonDisabled: true,
           altMessage: 'random image',
           isRed: true,
-          activeRed: 'active',
+          active: 'active',
           myBackground: 'my-background-color',
           todos: [
             { id: 1, title: "todo1", isActive: true },
@@ -95,8 +103,7 @@
           fontSize: 30,
         }
       }
-    })
-    app.mount('#app')
+    }).mount('#app')
 
   </script>
 </body>
