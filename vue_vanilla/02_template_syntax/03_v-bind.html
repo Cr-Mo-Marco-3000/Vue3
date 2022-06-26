@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .my-background-color {
+      background-color: yellow;
+    }
+  </style>
+</head> 
+<body>
+  <div id="app">
+
+    <!-------------------------------------------------------------------->
+    <!-- 1. 속성 바인딩 -->
+
+    <!-- 연결이 안 되는 기본 속성(html attribute)에 Vue를 묶어주는 게 v-bind -->
+    <!-- <img v-bind:src="imageSrc" alt=""> -->
+    <img v-bind:src="imageSrc" v-bind:alt="altMessage">
+    
+
+    <!-- 정말 많이 쓰이는 기능이기 때문에 생략 가능! -->
+    <!-- 위 코드와 동일한 코드 -->
+    <img :src="imageSrc" v-bind:alt="altMessage"> 
+      
+    <hr>
+
+    <!-- 1-1. Boolean 속성 바인딩 -->
+    <!-- html속성에서, disabled와 같이 참/거짓 여부로 나타내지는 속성의 경우 -->
+    <!-- v-bind를 묶어서, 적용 여부를 설정할 수 있다. -->
+    <!-- data의 isButtonDisabled가 true이므로 버튼이 활성화되니 않았다.-->
+    <div>
+      <button :disabled="isButtonDisabled">활성화 안됨</button>
+    </div>
+
+    <!-- 1-2. 여러 속성을 동적으로 바인딩 -->
+    <!-- JS 객체 안에 여러개의 속성들을 attribute(key): value(value) 형태로 넣어놓고 동시에 적용시킬 수 있다. -->
+    <!-- style과 href 동시에 적용 -->
+    <div>
+      <a v-bind='bigBoldYellow'>구글로 뿅뿅</a>
+    </div>
+
+    <!-------------------------------------------------------------------->
+    <!-- 2. 클래스 바인딩 -->
+    <!-- isRed가 true면 active라는 클래스를 주고 싶을 때. -->
+    <div :class="{ activeRed: isRed }">
+      이태원 클래스
+    </div>
+    <hr>
+
+    <!-- 클래스 여러 개 적용 시 배열로 묶어줌 -->
+    <h3 v-bind="[active, my-background-color]">
+      Hello vue js
+    </h3>
+
+    <!-------------------------------------------------------------------->
+
+    <!-- 3. 스타일 바인딩 -->
+    <ul>
+      <li v-for="todo in todos" :class="{ active : todo.isActive }" :style="{ fontsize: fontSize + 'px'}">
+        {{ todo }}
+      </li>
+    </ul>
+
+  </div>
+  <script src="https://unpkg.com/vue@3"></script>
+
+  <script>
+    const { createApp } = Vue 
+    
+    const app = Vue.createApp({
+      data () {
+        return {
+          imageSrc: 'http://picsum.photos/200/300',
+          bigBoldYellow: {
+            style: 'color: red;',
+            href: 'https://google.co.kr'
+          },
+          isButtonDisabled: true,
+          altMessage: 'random image',
+          isRed: true,
+          activeRed: 'active',
+          myBackground: 'my-background-color',
+          todos: [
+            { id: 1, title: "todo1", isActive: true },
+            { id: 2, title: "todo2", isActive: false },
+          ],
+          fontSize: 30,
+        }
+      }
+    })
+    app.mount('#app')
+
+  </script>
+</body>
+</html>

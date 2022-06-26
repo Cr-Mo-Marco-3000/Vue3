@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1번 방법 -->
+    <p>{{ message }}</p>
+
+    <!-- 2번 방법 -->
+    <p v-text="message"></p>
+
+
+    <!-- 개발자 도구에서 보면 {{}} 혹은 v-text 등은 사라짐 -->
+    <!-- 브라우저가 스크립트들을 읽어서 HTML을 만들어줌 -->
+    <!-- CSR => Client Side Rendering -->
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello'
+      }
+    })
+  </script>
+</body>
+</html>

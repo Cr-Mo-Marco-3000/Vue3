@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-show="isTrue">보여?</p>
+    <p v-show="isFalse">보이냐?</p>
+    <!-- show는 if와는 달리 문서에 존재하지만 display:None 속성을 주는 것  -->
+    <!-- 눈으로 보이느냐가 핵심! -->
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        isTrue: true,
+        isFalse: false,
+      }
+    })
+  </script>
+</body>
+</html>

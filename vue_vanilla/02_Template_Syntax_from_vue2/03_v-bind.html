@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .my-background-color {
+      background-color: yellow;
+    }
+  </style>
+</head> 
+<body>
+  <div id="app">
+
+    <!-- 속성 바인딩 -->
+    <!-- 연결이 안 되는 기본 속성에 Vue를 묶어주는 게 v-bind -->
+    <!-- <img v-bind:src="imageSrc" alt=""> -->
+    <img v-bind:src="{ imageSrc }" v-bind:alt="altMessage">
+    
+
+    <!-- 정말 많이 쓰이는 기능이기 때문에 생략 가능! -->
+    <!-- 위 코드와 동일한 코드 -->
+    <img :src="imageSrc" v-bind:alt="altMessage"> 
+      
+    <hr>
+
+    <!-- 클래스 바인딩 -->
+    <!-- isRed가 true면 active라는 클래스를 주고 싶다. -->
+    <div :class="{ activeRed: isRed }">
+      이태원 클래스
+    </div>
+    <hr>
+
+    <!-- 클래스 여러 개 적용 시 배열로 묶어줌 -->
+    <h3 v-bind="[active, my-background-color]">
+      Hello vue js
+    </h3>
+
+
+    <!-- 스타일 바인딩 -->
+
+    <ul>
+      <li v-for="todo in todos" :class="{ active : todo.isActive }" :style="{ fontsize: fontSize + 'px'}">
+        {{ todo }}
+      </li>
+    </ul>
+
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          imageSrc: 'http://picsum.photos/200/300',
+          altMessage: 'random image',
+          isRed: true,
+          activeRed: 'active',
+          myBackground: 'my-background-color',
+          todos: [
+            { id: 1, title: "todo1", isActive: true },
+            { id: 2, title: "todo2", isActive: false },
+          ],
+          fontSize: 30,
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>

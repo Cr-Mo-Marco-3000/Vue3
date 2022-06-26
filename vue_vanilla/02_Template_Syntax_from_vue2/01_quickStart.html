@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Quick Start</title>
+</head>
+<body>
+  <!-- 2. 선언적 렌더링 -->
+  <h2>선언적 렌더링</h2>
+
+  <!-- div => view -->
+  <div id="app1">
+    {{ message }}
+  </div>
+
+  <!-- 3. 엘리멘트 속성 바인딩 -->
+  <h2>Element 속성 바인딩</h2>
+  <div id="app2">
+    {{ message }}
+  </div>
+  <!-- 4. 조건 -->
+  <h2>조건</h2>
+    <div id="app3">
+      <!-- view에게만 들리는 attribute `v-` -->
+      <!-- boolean 평가 시 "" 안이 true이면 보임 -->
+      <p v-if="seen">보인다</p>
+    </div>
+  <!-- 5. 반복 -->
+  <h2>반복</h2>
+    <div id="app4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+  <!-- 6. 사용자 입력 핸들링 -->
+  <h2>사용자 입력 핸들링</h2>
+    <div id="app5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">로꾸꺼</button>
+      <input v-model="message" type="text">
+    </div>
+  <!-- 1. Vue CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    // 2. 선언적 렌더링
+
+    // new Vue => VM
+    const app1 = new Vue({
+      //element
+      el: '#app1',
+
+      // data:{} => M: Model
+      data: {
+        message: '오홍홍 좋아요'
+      }
+    })
+
+
+    // 3. 엘리먼트 속성 바인딩
+    const app2 = new Vue({
+      el: '#app2',
+      data: {
+        message: `이 메시지는 ${new Date()} 에 로드됨!`
+      }
+    })
+
+    
+    // 4. 조건
+    const app3 = new Vue({
+      el: '#app3',
+      data: {
+        seen: true,
+        // seen: false,
+      }
+    })
+
+
+    // 5. 반복
+    const app4 = new Vue({
+      el: '#app4',
+      data: {
+        todos: [
+          {text: 'js 복습'},
+          {text: 'vue 배우기'},
+          {text: '멋진거 만들기'},
+        ]
+      }
+    })
+
+
+    // 6. 사용자 입력 핸들링
+    // 이 안에서는 반드시 fucntion 키워드를 사용해 주어야 한다
+    // 화살표 함수 안 먹는다!!!
+    const obj = {
+      el: '#app5',
+      data: {
+        message: '안녕하세요'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    }
+
+    const app5 = new Vue(obj)
+
+    // 원칙적으로는, 아래 this.message에서 this는 method이기 때문에 message를 읽을 수 없지만, Vue가 인자로 받은 객체를 해체해서 하나의 객체로 만든다.
+    /*
+    요렇게 만들어준다.
+    const obj = {
+      el: '#app5',
+      message: '안녕하세요',
+      reverseMessage: function() {
+        this.message = this.message.split('').reverse().join('')
+      }
+    }
+    */
+
+  </script>
+</body>
+</html>

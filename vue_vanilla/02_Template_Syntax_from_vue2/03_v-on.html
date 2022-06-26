@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+    <!-- 메서드 핸들러 -->
+    <button v-on:click="doAlert">Alert1</button>
+    <button @click="doAlertTwo('인자 넘어가니?')">Alert2</button>
+    <button @click="onInput('ssaffy')">Button3</button>
+    
+    <!-- 기본 동작 방지 -->
+    <!-- submit은 동작하지만 기본동작은 막겠다. -->
+    <form action="/articles/" @submit.prevent="alertHello">
+      <button>Submit</button>
+    </form>
+
+
+    <!-- 키 별칭을 이용한 키 입력 수식어 -->    
+    <input type="text" @keyup.space="log">
+
+    <!-- callback 함수에서의 특수문법 () => 콜백 함수 log를 실행할건데, 첫 번째 인자로 a를 넘기고 싶다. -->
+    <!-- 일반 addeventListener에서와는 달리 () 로 쓴다 => 이상해도 어쩔 수 없다.  -->
+    <input type="text" @keyup.space="log('a')">
+
+    <p>{{ message }}</p>
+    <button @click="changeMessage">change Message</button>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el:'#app',
+      data: {
+        message: 'Hello Vue js'
+      },
+      methods: {
+        doAlert : function () {
+          alert('ssafy')
+        },
+        doAlertTwo: function (data) {
+          alert(data)
+        },
+        onInput: function (onInputValue) {
+          console.log(onInputValue)
+        },
+        log: function() {
+          console.log('keyup')
+        },
+        changeMessage: function() {
+          this.message = 'New Message!!!'
+        }
+        
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ numbers | getOddNums |getUnderTen}}</p>
+      <p>{{ getOddNumbersUnderTen }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        },
+        filters: {
+          getOddNums(array) {
+            // 여기서 화살표 함수 사용 가능한 이유 => this가 없어서 가능 => 원래 this가 있으면 일반 객체 내부와는 다르게 작동해서 vue에서는 사용 불가
+            return array.filter((num) => num % 2)
+          },
+          getUnderTen(array) {
+            return array.filter((num) => num < 10)
+          },
+        },
+        // 위 필터 두 번 먹인 것과 같은 결과
+        computed: {
+          getOddNumbersUnderTen() {
+            return this.numbers.filter((num) => num % 2 && num < 10)
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

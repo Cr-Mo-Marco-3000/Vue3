@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>상관 없는, 렌더링된 data: {{ other }}</p>
+      <p>Reverse by Computed: {{ reverseMessage }}</p>
+      <p>Reverse by Method: {{ reverseMessageM() }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "Original",
+          other: "아바바바",
+        },
+        methods: {
+          // methods 내부의 함수는 message가 아니라 상관 없는 data가 화면에 렌더링 될 때도 동작함!!! => {{ other }}
+          // data를 바꾸는 로직에 사용
+          reverseMessageM: function () {
+            console.log("메소드 동작!")
+            return this.message.split(" ").reverse().join(" ")
+          },
+        },
+        computed: {
+          // (data에 의존하는) 계산된 값
+          // data를 기반으로 값을 뽑아낼 때 사용
+          reverseMessage: function () {
+            return this.message.split(" ").reverse().join(" ")
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

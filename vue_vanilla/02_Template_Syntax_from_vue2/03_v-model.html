@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>단방향 바인딩: Input => Data</p>
+    <p>{{ msg1 }}</p>
+    <!-- input tag에 어떤 변화가 있든 다 인지 -->
+    <input type="text" @input="onInputChange" >
+
+    <p>쌍방향 바인딩: Input <=> Data</p>
+    <p>{{ msg2 }}</p>
+    <!-- data 이름을 넣어주면 됨 -->
+    <input type="text" v-model="msg2">
+
+    <!-- 실제로 체크박스를 누르는 행위가 데이터(true, false)를 바꾼다! -->
+    췤! <input id="box" type="checkbox" v-model="checked">
+    <label for="box">{{ checked }}</label>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue ({
+      el: '#app',
+      data: function () {
+        return {
+          msg1: '111',
+          msg2: '222',
+          checked: true
+        }
+      },
+      methods: {
+        onInputChange (event) {
+          this.msg1 = event.target.value
+        }
+      },
+    })
+  </script>
+</body>
+</html>
